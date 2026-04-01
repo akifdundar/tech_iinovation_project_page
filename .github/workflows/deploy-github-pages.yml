@@ -17,11 +17,16 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# GitHub Actions JS actions (checkout, setup-node) Node 20 → 24 geçişi; uyarıyı kaldırır.
+# https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Base path for GitHub Pages
         run: |
@@ -33,9 +38,9 @@ jobs:
           fi
           echo "STATIC_EXPORT=true" >> "$GITHUB_ENV"
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
           cache-dependency-path: package-lock.json
 
