@@ -3,8 +3,14 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const staticExport = process.env.STATIC_EXPORT === 'true'
+const rawBase = (process.env.BASE_PATH || '').trim().replace(/\/$/, '')
+const basePath = rawBase ? (rawBase.startsWith('/') ? rawBase : `/${rawBase}`) : undefined
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...(staticExport ? { output: 'export' } : {}),
+  ...(basePath ? { basePath } : {}),
   eslint: {
     ignoreDuringBuilds: true,
   },

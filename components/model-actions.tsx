@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Upload, DollarSign, Key, BookOpen } from "lucide-react"
@@ -143,10 +144,10 @@ export function ModelActions({ model, campaignId }: ModelActionsProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Button className="w-full" size="lg" asChild>
-                  <a href="/settings">
+                  <Link href="/settings">
                     <Key className="h-4 w-4 mr-2" />
                     Generate API Key
-                  </a>
+                  </Link>
                 </Button>
                 <Button variant="outline" className="w-full bg-transparent" size="lg">
                   <BookOpen className="h-4 w-4 mr-2" />
